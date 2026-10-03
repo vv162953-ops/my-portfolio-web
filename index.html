@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIJAYAKUMAR V | Data Analyst & IT Engineer Portfolio</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {ooyo988
+                    colors: {
+                        cyber: {
+                            black: '#08080a',
+                            card: '#0f0f14',
+                            red: '#ff1e43',
+                            glow: '#ff0033',
+                            darkred: '#3d0812',
+                            lightred: '#ff5c75',
+                            accent: '#ff2d55',
+                            border: 'rgba(255, 30, 67, 0.25)',
+                            glass: 'rgba(15, 15, 20, 0.75)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    },
+                    boxShadow: {
+                        'neon-red': '0 0 20px rgba(255, 0, 51, 0.4), 0 0 40px rgba(255, 0, 51, 0.2)',
+                        'neon-card': '0 8px 32px 0 rgba(255, 0, 51, 0.15)',
+                        'glow-sm': '0 0 10px rgba(255, 30, 67, 0.5)',
+                        'glow-lg': '0 0 35px rgba(255, 0, 51, 0.6)'
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2.5s infinite ease-in-out',
+                        'float': 'float 5s ease-in-out infinite',
+                        'scanline': 'scanline 8s linear infinite'
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(255, 0, 51, 0.3)' },
+                            '50%': { boxShadow: '0 0 35px rgba(255, 0, 51, 0.7)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        scanline: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(1000%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Chart.js for Data Visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- GSAP for Smooth Motion & Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <style>
+        body {
+            background-color: #060608;
+            color: #e2e8f0;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #08080a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a0a10;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff1e43;
+        }
+
+        .neon-text {
+            text-shadow: 0 0 10px rgba(255, 30, 67, 0.7), 0 0 20px rgba(255, 30, 67, 0.4);
+        }
+
+        .neon-border {
+            border: 1px solid rgba(255, 30, 67, 0.35);
+            box-shadow: inset 0 0 15px rgba(255, 30, 67, 0.1), 0 0 15px rgba(255, 30, 67, 0.2);
+        }
+
+        .glass-panel {
+            background: rgba(12, 12, 18, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 30, 67, 0.2);
+        }
+
+        .glass-panel-hover:hover {
+            border-color: rgba(255, 30, 67, 0.6);
+            box-shadow: 0 8px 30px rgba(255, 0, 51, 0.25);
+            transform: translateY(-3px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cyber-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 30, 67, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 30, 67, 0.04) 1px, transparent 1px);
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .glow-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #ff1e43;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ff1e43, 0 0 20px #ff1e43;
+        }
+    </style>
+</head>
+<body class="cyber-grid relative antialiased selection:bg-cyber-red selection:text-white">
+
+    <!-- 3D Canvas Background Container -->
+    <div id="canvas-container"></div>
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-panel border-b border-cyber-border/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-lg bg-cyber-darkred/80 border border-cyber-red flex items-center justify-center font-mono font-bold text-cyber-red group-hover:shadow-neon-red transition-all">
+                    VK
+                </div>
+                <div>
+                    <span class="font-mono font-bold tracking-wider text-white group-hover:text-cyber-red transition-colors">VIJAYAKUMAR V</span>
+                    <span class="block text-[10px] font-mono text-cyber-red tracking-widest uppercase">DATA ANALYST // B.TECH IT</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-mono">
+                <a href="#about" class="text-gray-300 hover:text-cyber-red transition-colors flex items-center gap-1.5"><span class="text-cyber-red">&gt;</span> About</a>
+                <a href="#analytics" class="text-gray-300 hover:text-cyber-red transition-colors flex items-center gap-1.5"><span class="text-cyber-red">&gt;</span> Dashboard</a>
+                <a href="#skills" class="text-gray-300 hover:text-cyber-red transition-colors flex items-center gap-1.5"><span class="text-cyber-red">&gt;</span> Skills</a>
+                <a href="#projects" class="text-gray-300 hover:text-cyber-red transition-colors flex items-center gap-1.5"><span class="text-cyber-red">&gt;</span> Projects</a>
+                <a href="#certifications" class="text-gray-300 hover:text-cyber-red transition-colors flex items-center gap-1.5"><span class="text-cyber-red">&gt;</span> Certs</a>
+                <a href="#terminal" class="text-gray-300 hover:text-cyber-red transition-colors flex items-center gap-1.5"><span class="text-cyber-red">&gt;</span> CLI</a>
+            </nav>
+
+            <!-- Actions & Status -->
+            <div class="flex items-center space-x-4">
+                <!-- Sound Effects Toggle -->
+                <button id="sound-toggle" onclick="toggleAudio()" class="p-2 rounded-lg border border-cyber-border bg-cyber-card/60 text-gray-400 hover:text-cyber-red hover:border-cyber-red transition-all text-xs flex items-center gap-2" title="Toggle Ambient Audio">
+                    <i class="fas fa-volume-mute" id="sound-icon"></i>
+                    <span class="hidden sm:inline font-mono text-[11px]" id="sound-text">AUDIO OFF</span>
+                </button>
+
+                <!-- Hire Status Badge -->
+                <a href="#contact" class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyber-darkred/60 border border-cyber-red/50 text-xs font-mono text-cyber-lightred hover:bg-cyber-red hover:text-white transition-all shadow-glow-sm">
+                    <span class="glow-dot animate-pulse"></span>
+                    <span>AVAILABLE</span>
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-300 hover:text-cyber-red focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-b border-cyber-border/60 px-4 py-4 space-y-3 font-mono text-sm">
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-cyber-red py-1"><i class="fas fa-user text-cyber-red mr-2"></i> About</a>
+            <a href="#analytics" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-cyber-red py-1"><i class="fas fa-chart-line text-cyber-red mr-2"></i> Dashboard</a>
+            <a href="#skills" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-cyber-red py-1"><i class="fas fa-code text-cyber-red mr-2"></i> Skills</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-cyber-red py-1"><i class="fas fa-microchip text-cyber-red mr-2"></i> Projects</a>
+            <a href="#certifications" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-cyber-red py-1"><i class="fas fa-certificate text-cyber-red mr-2"></i> Certifications</a>
+            <a href="#terminal" onclick="toggleMobileMenu()" class="block text-gray-300 hover:text-cyber-red py-1"><i class="fas fa-terminal text-cyber-red mr-2"></i> CLI Terminal</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-cyber-red hover:underline py-1"><i class="fas fa-envelope text-cyber-red mr-2"></i> Contact Vijayakumar</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative min-h-screen pt-24 pb-16 flex items-center justify-center z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Left Column: Hero Text & Information -->
+            <div class="lg:col-span-7 space-y-6 text-left">
+                
+                <!-- Status Header Tag -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-cyber-red/40 text-xs font-mono text-cyber-lightred">
+                    <span class="w-2 h-2 rounded-full bg-cyber-red animate-ping"></span>
+                    <span class="tracking-wide uppercase">B.Tech IT Student // Data Analytics Specialist</span>
+                </div>
+
+                <!-- Main Name & Title -->
+                <div>
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight">
+                        VIJAYAKUMAR <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-red via-cyber-lightred to-red-400 neon-text">V</span>
+                    </h1>
+                    
+                    <!-- Dynamic Typewriter Subtitle -->
+                    <div class="h-10 mt-2 font-mono text-lg sm:text-2xl text-gray-300 flex items-center gap-2">
+                        <span class="text-cyber-red font-bold">&gt;</span>
+                        <span id="typewriter" class="text-cyber-lightred font-semibold"></span>
+                        <span class="w-2.5 h-6 bg-cyber-red inline-block animate-pulse"></span>
+                    </div>
+                </div>
+
+                <!-- Summary Paragraph -->
+                <p class="text-gray-400 text-base sm:text-lg max-w-2xl leading-relaxed">
+                    Motivated and detail-oriented <strong class="text-white">B.Tech Information Technology</strong> student at VSA Group of Institutions. Specializing in turning complex data into actionable business intelligence using <span class="text-cyber-red font-mono font-medium">Python, SQL, Power BI & MS Excel</span> alongside embedded IoT engineering.
+                </p>
+
+                <!-- Interactive CTA Action Buttons -->
+                <div class="flex flex-wrap gap-4 pt-4 font-mono text-sm">
+                    <a href="#analytics" class="px-6 py-3 rounded-lg bg-cyber-red text-white font-semibold hover:bg-red-600 transition-all shadow-neon-red flex items-center gap-2 group">
+                        <span><i class="fas fa-chart-pie mr-1"></i> Interactive Dashboard</span>
+                        <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+
+                    <a href="#projects" class="px-6 py-3 rounded-lg glass-panel text-gray-200 border border-cyber-border hover:border-cyber-red hover:text-white transition-all flex items-center gap-2">
+                        <i class="fas fa-cube text-cyber-red"></i> Explore 3D Projects
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/vijayakumar-velmurugan-09b10642b" target="_blank" rel="noopener" class="px-4 py-3 rounded-lg glass-panel text-gray-300 hover:text-cyber-red border border-cyber-border hover:border-cyber-red transition-all">
+                        <i class="fab font-bold fa-linkedin text-lg"></i>
+                    </a>
+                </div>
+
+                <!-- Quick Location & Contact Highlights -->
+                <div class="pt-6 border-t border-cyber-border/30 grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs font-mono text-gray-400">
+                    <div>
+                        <span class="text-gray-500 block uppercase">Location</span>
+                        <span class="text-gray-200 font-medium"><i class="fas fa-map-marker-alt text-cyber-red mr-1"></i> Salem, Tamil Nadu</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 block uppercase">Education</span>
+                        <span class="text-gray-200 font-medium"><i class="fas fa-graduation-cap text-cyber-red mr-1"></i> B.Tech IT (2024-2028)</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500 block uppercase">Email</span>
+                        <a href="mailto:w162953@gmail.com" class="text-gray-200 font-medium hover:text-cyber-red"><i class="fas fa-envelope text-cyber-red mr-1"></i> w162953@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive 3D Cyber HUD Workspace Preview -->
+            <div class="lg:col-span-5 relative flex justify-center items-center">
+                
+                <!-- Background Ambient Glow Halo -->
+                <div class="absolute w-72 h-72 sm:w-96 sm:h-96 bg-cyber-red/20 rounded-full blur-3xl -z-10 animate-pulse-glow"></div>
+
+                <!-- Glassmorphic Cyber Workspace Display HUD -->
+                <div class="w-full glass-panel rounded-2xl p-5 border border-cyber-border/60 shadow-neon-card relative overflow-hidden group">
+                    
+                    <!-- Scanline effect overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cyber-red/5 to-transparent h-12 w-full animate-scanline pointer-events-none"></div>
+
+                    <!-- HUD Top Bar -->
+                    <div class="flex items-center justify-between border-b border-cyber-border/40 pb-3 mb-4 font-mono text-xs">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+                            <span class="text-gray-400 ml-2">data_analytics_hub.py</span>
+                        </div>
+                        <span class="text-cyber-red font-bold text-[10px] uppercase tracking-widest animate-pulse">● LIVE METRICS</span>
+                    </div>
+
+                    <!-- Code Snippet & Analytics Telemetry HUD -->
+                    <div class="space-y-3 font-mono text-xs">
+                        <div class="p-3 bg-cyber-black/80 rounded-lg border border-cyber-border/30 text-gray-300 overflow-x-auto">
+                            <span class="text-purple-400">import</span> pandas <span class="text-purple-400">as</span> pd<br>
+                            <span class="text-purple-400">import</span> plotly.express <span class="text-purple-400">as</span> px<br>
+                            <span class="text-gray-500"># Load Vijayakumar's BI Engine</span><br>
+                            df = pd.read_sql(<span class="text-green-400">"SELECT * FROM insights"</span>)<br>
+                            fig = px.bar(df, x=<span class="text-green-400">'category'</span>, y=<span class="text-green-400">'growth'</span>, color_discrete_sequence=[<span class="text-green-400">'#ff1e43'</span>])
+                        </div>
+
+                        <!-- Mini Visual HUD Metric Gauges -->
+                        <div class="grid grid-cols-2 gap-3 pt-1">
+                            <div class="p-3 bg-cyber-card/80 rounded-lg border border-cyber-border/40 hover:border-cyber-red transition-all">
+                                <span class="text-[10px] text-gray-400 uppercase tracking-wider block">Data Cleaning</span>
+                                <div class="text-lg font-bold text-cyber-lightred mt-1 flex items-center justify-between">
+                                    <span>98.5%</span>
+                                    <i class="fas fa-check-circle text-cyber-red text-sm"></i>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-1.5 mt-2">
+                                    <div class="bg-cyber-red h-1.5 rounded-full" style="width: 98.5%"></div>
+                                </div>
+                            </div>
+
+                            <div class="p-3 bg-cyber-card/80 rounded-lg border border-cyber-border/40 hover:border-cyber-red transition-all">
+                                <span class="text-[10px] text-gray-400 uppercase tracking-wider block">IoT Sensor Sync</span>
+                                <div class="text-lg font-bold text-cyber-lightred mt-1 flex items-center justify-between">
+                                    <span>ESP32 Ready</span>
+                                    <i class="fas fa-microchip text-cyber-red text-sm"></i>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-1.5 mt-2">
+                                    <div class="bg-cyber-red h-1.5 rounded-full" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Audio / 3D Telemetry Visualizer -->
+                        <div class="p-3 bg-cyber-darkred/30 rounded-lg border border-cyber-red/40 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-cyber-red/20 border border-cyber-red flex items-center justify-center text-cyber-red text-xs">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-white">SYMIT'26 National Award</p>
+                                    <p class="text-[10px] text-gray-400">National Symposium Winner</p>
+                                </div>
+                            </div>
+                            <span class="text-xs text-cyber-lightred font-bold">1st Prize</span>
+                        </div>
+                    </div>
+
+                    <!-- Holographic Floating Badge -->
+                    <div class="mt-4 pt-3 border-t border-cyber-border/30 flex items-center justify-between text-[11px] font-mono text-gray-400">
+                        <span><i class="fas fa-microchip text-cyber-red"></i> Hardware & Software Integrated</span>
+                        <span class="text-cyber-red font-semibold">2026 ACTIVE</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono font-bold text-cyber-red tracking-widest uppercase mb-2"><i class="fas fa-user-tag mr-2"></i> PROFILE OVERVIEW</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">About Vijayakumar V</h3>
+                <div class="w-16 h-1 bg-cyber-red mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Education Card -->
+                <div class="glass-panel rounded-xl p-6 border border-cyber-border/50 glass-panel-hover relative overflow-hidden">
+                    <div class="w-12 h-12 rounded-lg bg-cyber-darkred/80 border border-cyber-red flex items-center justify-center text-cyber-red text-xl mb-4">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-2">Education</h4>
+                    <p class="text-cyber-lightred font-mono text-sm font-semibold mb-1">B.Tech in Information Technology</p>
+                    <p class="text-gray-300 text-sm">VSA Group Of Institutions, Salem</p>
+                    <p class="text-gray-500 font-mono text-xs mt-3"><i class="far fa-calendar-alt text-cyber-red mr-1"></i> Academic Period: 2024 - 2028</p>
+                    <p class="text-gray-400 text-xs mt-3 leading-relaxed">
+                        Focusing on core computer science fundamentals, data structures, relational databases, software development, and modern information technology paradigms.
+                    </p>
+                </div>
+
+                <!-- Technical Analytics Focus Card -->
+                <div class="glass-panel rounded-xl p-6 border border-cyber-border/50 glass-panel-hover relative overflow-hidden">
+                    <div class="w-12 h-12 rounded-lg bg-cyber-darkred/80 border border-cyber-red flex items-center justify-center text-cyber-red text-xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-2">Core Focus</h4>
+                    <p class="text-cyber-lightred font-mono text-sm font-semibold mb-1">Data Analytics & Business Intelligence</p>
+                    <p class="text-gray-300 text-sm">Data Cleaning, Modeling & Dashboards</p>
+                    <p class="text-gray-500 font-mono text-xs mt-3"><i class="fas fa-brain text-cyber-red mr-1"></i> Problem Solving & BI Insights</p>
+                    <p class="text-gray-400 text-xs mt-3 leading-relaxed">
+                        Passionate about discovering trends, building interactive Power BI dashboards, executing efficient SQL queries, and transforming raw datasets into impactful visual storytelling.
+                    </p>
+                </div>
+
+                <!-- IoT & Hardware Integration Card -->
+                <div class="glass-panel rounded-xl p-6 border border-cyber-border/50 glass-panel-hover relative overflow-hidden">
+                    <div class="w-12 h-12 rounded-lg bg-cyber-darkred/80 border border-cyber-red flex items-center justify-center text-cyber-red text-xl mb-4">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-2">Hardware & Embedded</h4>
+                    <p class="text-cyber-lightred font-mono text-sm font-semibold mb-1">IoT & Embedded Systems</p>
+                    <p class="text-gray-300 text-sm">ESP32, Arduino & Ultrasonic Sensors</p>
+                    <p class="text-gray-500 font-mono text-xs mt-3"><i class="fas fa-code-branch text-cyber-red mr-1"></i> Embedded C / C++</p>
+                    <p class="text-gray-400 text-xs mt-3 leading-relaxed">
+                        Hands-on experience engineering physical computing systems like autonomous Human-Following Robots utilizing motor drivers, IR telemetry, and real-time sensor feedback.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Soft Skills & Languages Bar -->
+            <div class="mt-12 glass-panel rounded-xl p-6 border border-cyber-border/50">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Soft Skills -->
+                    <div>
+                        <h4 class="text-sm font-mono text-cyber-red font-bold uppercase tracking-wider mb-4"><i class="fas fa-users mr-2"></i> Soft Skills & Competencies</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 rounded-lg bg-cyber-card border border-cyber-border text-xs font-mono text-gray-300 hover:border-cyber-red transition-all"><i class="fas fa-lightbulb text-cyber-red mr-1"></i> Problem Solving</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-cyber-card border border-cyber-border text-xs font-mono text-gray-300 hover:border-cyber-red transition-all"><i class="fas fa-comments text-cyber-red mr-1"></i> Communication</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-cyber-card border border-cyber-border text-xs font-mono text-gray-300 hover:border-cyber-red transition-all"><i class="fas fa-people-carry text-cyber-red mr-1"></i> Teamwork</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-cyber-card border border-cyber-border text-xs font-mono text-gray-300 hover:border-cyber-red transition-all"><i class="fas fa-clock text-cyber-red mr-1"></i> Time Management</span>
+                        </div>
+                    </div>
+
+                    <!-- Languages -->
+                    <div>
+                        <h4 class="text-sm font-mono text-cyber-red font-bold uppercase tracking-wider mb-4"><i class="fas fa-language mr-2"></i> Multilingual Capabilities</h4>
+                        <div class="grid grid-cols-3 gap-3 font-mono text-xs">
+                            <div class="p-2 bg-cyber-card rounded-lg border border-cyber-border/50 text-center">
+                                <span class="text-white font-bold block">English</span>
+                                <span class="text-cyber-lightred text-[10px]">Fluent</span>
+                            </div>
+                            <div class="p-2 bg-cyber-card rounded-lg border border-cyber-border/50 text-center">
+                                <span class="text-white font-bold block">Tamil</span>
+                                <span class="text-cyber-lightred text-[10px]">Fluent (Native)</span>
+                            </div>
+                            <div class="p-2 bg-cyber-card rounded-lg border border-cyber-border/50 text-center">
+                                <span class="text-white font-bold block">German</span>
+                                <span class="text-cyber-lightred text-[10px]">Beginner</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- INTERACTIVE DATA DASHBOARD SECTION -->
+    <section id="analytics" class="py-20 bg-cyber-black/80 relative z-10 border-y border-cyber-border/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+                <div>
+                    <h2 class="text-xs font-mono font-bold text-cyber-red tracking-widest uppercase mb-2"><i class="fas fa-chart-bar mr-2"></i> REAL-TIME INTERACTIVE ANALYTICS</h2>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Power BI & Python Analytics Engine</h3>
+                </div>
+                <div class="mt-4 md:mt-0 flex items-center gap-3 font-mono text-xs">
+                    <button onclick="updateDashboardData('sales')" id="btn-sales" class="px-4 py-2 rounded-lg bg-cyber-red text-white font-semibold shadow-glow-sm transition-all">Sales BI</button>
+                    <button onclick="updateDashboardData('iot')" id="btn-iot" class="px-4 py-2 rounded-lg glass-panel text-gray-300 border border-cyber-border hover:border-cyber-red transition-all">IoT Robot Logs</button>
+                    <button onclick="updateDashboardData('skills')" id="btn-skills" class="px-4 py-2 rounded-lg glass-panel text-gray-300 border border-cyber-border hover:border-cyber-red transition-all">Tech Stack BI</button>
+                </div>
+            </div>
+
+            <!-- Dashboard Visual Window Frame -->
+            <div class="glass-panel rounded-2xl p-6 border border-cyber-border shadow-neon-card relative">
+                
+                <!-- Dashboard Top Metrics Row -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div class="p-4 bg-cyber-card/90 rounded-xl border border-cyber-border/60">
+                        <span class="text-[11px] font-mono text-gray-400 block">TOTAL REVENUE ANALYZED</span>
+                        <span class="text-2xl font-extrabold text-white font-mono" id="metric-1">$2,848.5K</span>
+                        <span class="text-[10px] font-mono text-green-400 flex items-center mt-1"><i class="fas fa-arrow-up mr-1"></i> +18.4% YoY</span>
+                    </div>
+
+                    <div class="p-4 bg-cyber-card/90 rounded-xl border border-cyber-border/60">
+                        <span class="text-[11px] font-mono text-gray-400 block">DATA RECORDS CLEANED</span>
+                        <span class="text-2xl font-extrabold text-cyber-lightred font-mono" id="metric-2">1,450,200</span>
+                        <span class="text-[10px] font-mono text-cyber-red flex items-center mt-1"><i class="fas fa-shield-alt mr-1"></i> 99.9% Accuracy</span>
+                    </div>
+
+                    <div class="p-4 bg-cyber-card/90 rounded-xl border border-cyber-border/60">
+                        <span class="text-[11px] font-mono text-gray-400 block">POWER BI DASHBOARDS</span>
+                        <span class="text-2xl font-extrabold text-white font-mono" id="metric-3">12 Dashboards</span>
+                        <span class="text-[10px] font-mono text-green-400 flex items-center mt-1"><i class="fas fa-check mr-1"></i> Fully Interactive</span>
+                    </div>
+
+                    <div class="p-4 bg-cyber-card/90 rounded-xl border border-cyber-border/60">
+                        <span class="text-[11px] font-mono text-gray-400 block">SQL QUERY SPEED</span>
+                        <span class="text-2xl font-extrabold text-cyber-lightred font-mono" id="metric-4">12.4 ms</span>
+                        <span class="text-[10px] font-mono text-green-400 flex items-center mt-1"><i class="fas fa-bolt mr-1"></i> Optimized Indexes</span>
+                    </div>
+                </div>
+
+                <!-- Charts Container Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Main Trend Line Chart (Spans 2 columns) -->
+                    <div class="lg:col-span-2 p-4 bg-cyber-card/70 rounded-xl border border-cyber-border/40">
+                        <div class="flex items-center justify-between mb-4 font-mono text-xs">
+                            <span class="text-gray-300 font-bold flex items-center gap-2">
+                                <i class="fas fa-chart-area text-cyber-red"></i> <span id="main-chart-title">Monthly Business Analytics Trend</span>
+                            </span>
+                            <span class="text-cyber-red text-[10px]">LIVE REFRESH</span>
+                        </div>
+                        <div class="h-64 sm:h-72 w-full relative">
+                            <canvas id="mainAnalyticsChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Doughnut / Pie Chart Breakdown -->
+                    <div class="p-4 bg-cyber-card/70 rounded-xl border border-cyber-border/40 flex flex-col justify-between">
+                        <div class="flex items-center justify-between mb-4 font-mono text-xs">
+                            <span class="text-gray-300 font-bold flex items-center gap-2">
+                                <i class="fas fa-pie-chart text-cyber-red"></i> <span id="pie-chart-title">Category Distribution</span>
+                            </span>
+                            <span class="text-gray-400 text-[10px]">SQL / Power BI</span>
+                        </div>
+                        <div class="h-64 w-full relative flex items-center justify-center">
+                            <canvas id="pieAnalyticsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS & TECH STACK SECTION -->
+    <section id="skills" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono font-bold text-cyber-red tracking-widest uppercase mb-2"><i class="fas fa-code mr-2"></i> TECHNICAL PROFICIENCY</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Skills & Analytical Arsenal</h3>
+                <div class="w-16 h-1 bg-cyber-red mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                <!-- Skills Progress Bars List -->
+                <div class="lg:col-span-7 space-y-5">
+                    
+                    <!-- Python -->
+                    <div class="glass-panel rounded-xl p-4 border border-cyber-border/40 hover:border-cyber-red transition-all">
+                        <div class="flex justify-between items-center mb-2 font-mono text-sm">
+                            <span class="text-white font-bold flex items-center gap-2">
+                                <i class="fab fa-python text-cyber-red text-lg"></i> Python (Pandas, NumPy, Matplotlib)
+                            </span>
+                            <span class="text-cyber-lightred font-bold">85%</span>
+                        </div>
+                        <div class="w-full bg-cyber-card rounded-full h-2.5 overflow-hidden border border-cyber-border/30">
+                            <div class="bg-gradient-to-r from-red-600 to-cyber-red h-2.5 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+
+                    <!-- SQL & Databases -->
+                    <div class="glass-panel rounded-xl p-4 border border-cyber-border/40 hover:border-cyber-red transition-all">
+                        <div class="flex justify-between items-center mb-2 font-mono text-sm">
+                            <span class="text-white font-bold flex items-center gap-2">
+                                <i class="fas fa-database text-cyber-red text-lg"></i> SQL & MySQL (Queries, Joins, Aggregation)
+                            </span>
+                            <span class="text-cyber-lightred font-bold">88%</span>
+                        </div>
+                        <div class="w-full bg-cyber-card rounded-full h-2.5 overflow-hidden border border-cyber-border/30">
+                            <div class="bg-gradient-to-r from-red-600 to-cyber-red h-2.5 rounded-full" style="width: 88%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Power BI -->
+                    <div class="glass-panel rounded-xl p-4 border border-cyber-border/40 hover:border-cyber-red transition-all">
+                        <div class="flex justify-between items-center mb-2 font-mono text-sm">
+                            <span class="text-white font-bold flex items-center gap-2">
+                                <i class="fas fa-chart-pie text-cyber-red text-lg"></i> Power BI (DAX, Modeling, Reports)
+                            </span>
+                            <span class="text-cyber-lightred font-bold">90%</span>
+                        </div>
+                        <div class="w-full bg-cyber-card rounded-full h-2.5 overflow-hidden border border-cyber-border/30">
+                            <div class="bg-gradient-to-r from-red-600 to-cyber-red h-2.5 rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+
+                    <!-- MS Excel -->
+                    <div class="glass-panel rounded-xl p-4 border border-cyber-border/40 hover:border-cyber-red transition-all">
+                        <div class="flex justify-between items-center mb-2 font-mono text-sm">
+                            <span class="text-white font-bold flex items-center gap-2">
+                                <i class="fas fa-file-excel text-cyber-red text-lg"></i> MS Excel (Pivot Tables, VLOOKUP, Analysis)
+                            </span>
+                            <span class="text-cyber-lightred font-bold">92%</span>
+                        </div>
+                        <div class="w-full bg-cyber-card rounded-full h-2.5 overflow-hidden border border-cyber-border/30">
+                            <div class="bg-gradient-to-r from-red-600 to-cyber-red h-2.5 rounded-full" style="width: 92%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Embedded C / C++ / ESP32 -->
+                    <div class="glass-panel rounded-xl p-4 border border-cyber-border/40 hover:border-cyber-red transition-all">
+                        <div class="flex justify-between items-center mb-2 font-mono text-sm">
+                            <span class="text-white font-bold flex items-center gap-2">
+                                <i class="fas fa-microchip text-cyber-red text-lg"></i> Embedded C/C++ & IoT (ESP32, Sensors)
+                            </span>
+                            <span class="text-cyber-lightred font-bold">82%</span>
+                        </div>
+                        <div class="w-full bg-cyber-card rounded-full h-2.5 overflow-hidden border border-cyber-border/30">
+                            <div class="bg-gradient-to-r from-red-600 to-cyber-red h-2.5 rounded-full" style="width: 82%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Git & GitHub -->
+                    <div class="glass-panel rounded-xl p-4 border border-cyber-border/40 hover:border-cyber-red transition-all">
+                        <div class="flex justify-between items-center mb-2 font-mono text-sm">
+                            <span class="text-white font-bold flex items-center gap-2">
+                                <i class="fab fa-git-alt text-cyber-red text-lg"></i> Git & GitHub Version Control
+                            </span>
+                            <span class="text-cyber-lightred font-bold">80%</span>
+                        </div>
+                        <div class="w-full bg-cyber-card rounded-full h-2.5 overflow-hidden border border-cyber-border/30">
+                            <div class="bg-gradient-to-r from-red-600 to-cyber-red h-2.5 rounded-full" style="width: 80%"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Radar Chart Visualiser for Technical Competency -->
+                <div class="lg:col-span-5 glass-panel rounded-2xl p-6 border border-cyber-border shadow-neon-card text-center">
+                    <h4 class="text-sm font-mono text-cyber-red font-bold uppercase tracking-wider mb-4"><i class="fas fa-radar mr-2"></i> Skill Distribution Radar</h4>
+                    <div class="h-80 relative flex items-center justify-center">
+                        <canvas id="skillsRadarChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="py-20 bg-cyber-black/90 relative z-10 border-t border-cyber-border/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono font-bold text-cyber-red tracking-widest uppercase mb-2"><i class="fas fa-laptop-code mr-2"></i> FEATURED WORK</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Projects & Innovations</h3>
+                <div class="w-16 h-1 bg-cyber-red mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- PROJECT 1: Human-Following-Robot -->
+                <div class="glass-panel rounded-2xl p-6 border border-cyber-border/60 glass-panel-hover flex flex-col justify-between relative overflow-hidden">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-cyber-darkred text-cyber-lightred text-xs font-mono font-bold border border-cyber-red/40">
+                                IoT & EMBEDDED ROBOTICS
+                            </span>
+                            <span class="text-xs font-mono text-gray-400"><i class="fas fa-microchip text-cyber-red mr-1"></i> ESP32 Controller</span>
+                        </div>
+
+                        <h4 class="text-2xl font-bold text-white mb-2">Human-Following Robot</h4>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Engineered an autonomous human-following robot using ESP32 microcontroller, Ultrasonic distance sensors, and IR direction sensors. Controls DC motor movement dynamically using the L298N motor driver based on real-time human tracking telemetry.
+                        </p>
+
+                        <!-- Interactive Robot Sensor Simulation Canvas -->
+                        <div class="bg-cyber-card/90 rounded-xl p-4 border border-cyber-border/50 mb-6 font-mono">
+                            <div class="flex items-center justify-between text-xs text-gray-400 mb-2">
+                                <span><i class="fas fa-gamepad text-cyber-red mr-1"></i> Interactive Sensor Simulation</span>
+                                <span id="robot-status" class="text-green-400 font-bold">TARGET DETECTED</span>
+                            </div>
+                            
+                            <!-- Interactive Slider simulating distance -->
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-[11px] text-gray-400 mb-1">
+                                        <span>Human Distance (Ultrasonic):</span>
+                                        <span id="dist-val" class="text-cyber-lightred font-bold">25 cm</span>
+                                    </div>
+                                    <input type="range" id="sensor-slider" min="5" max="100" value="25" oninput="updateRobotSimulation(this.value)" class="w-full accent-cyber-red cursor-pointer">
+                                </div>
+
+                                <div class="p-3 bg-cyber-black rounded-lg border border-cyber-border/30 text-xs flex justify-between items-center">
+                                    <span>Motor Action Output:</span>
+                                    <span id="motor-action" class="text-cyber-red font-bold animate-pulse">MOVE FORWARD (PWM: 200)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tech Stack Tags -->
+                        <div class="flex flex-wrap gap-2 mb-6 font-mono text-xs">
+                            <span class="px-2.5 py-1 rounded bg-cyber-card border border-cyber-border text-gray-300">ESP32</span>
+                            <span class="px-2.5 py-1 rounded bg-cyber-card border border-cyber-border text-gray-300">Arduino IDE</span>
+                            <span class="px-2.5 py-1 rounded bg-cyber-card border border-cyber-border text-gray-300">Embedded C/C++</span>
+                            <span class="px-2.5 py-1 rounded bg-cyber-card border border-cyber-border text-gray-300">Ultrasonic Sensors</span>
+                            <span class="px-2.5 py-1 rounded bg-cyber-card border border-cyber-border text-gray-300">IR Sensors</span>
+                            <span class="px-2.5 py-1 rounded bg-cyber-card border border-cyber-border text-gray-300">L298N Driver</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-cyber-border/30 flex justify-between items-center font-mono text-xs">
+                        <span class="text-gray-400"><i class="fas fa-layer-group text-cyber-red mr-1"></i> Hardware Prototype</span>
+                        <a href="https://github.com" target="_blank" class="text-cyber-lightred hover:text-white flex items-center gap-1 font-bold">
+                            View Firmware <i class="fas fa-external-link-alt text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- PROJECT 2: Data Analytics & BI Dashboard Hub -->
+                <div class="glass-panel rounded-2xl p-6 border border-cyber-border/60 glass-panel-hover flex flex-col justify-between relative overflow-hidden">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-full bg-cyber-darkred text-cyber-lightred text-xs font-mono font-bold border border-cyber-red/40">
+                                DATA ANALYTICS & BI
+                            </span>
+                            <span class="text-xs font-mono text-gray-400"><i class="fas fa-chart-area text-cyber-red mr-1"></i> Power BI & Python</span>
+                        </div>
+
+                        <h4 class="text-2xl font-bold text-white mb-2">End-to-End Business Intelligence Suite</h4>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            Developed a comprehensive analytical workflow incorporating automated SQL data cleaning scripts, exploratory data analysis with Pandas, and interactive Power BI dashboards with dynamic KPI cards, DAX measures, and drill-through visual capabilities.
+                        </p>
+
+                        <!-- Visual Data Dashboard Features List -->
+                        <div class="bg-cyber-card/90 rounded-xl p-4 border border-cyber-border/50 mb-6 font-mono text-xs space-y-2.5">
+                            <div class="flex items-center gap-2 text-gray-300">
+                                <i class="fas fa-check-circle text-cyber-red"></i>
+                                <span>Automated SQL Queries & Data Normalization</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-300">
+                                <i class="fas fa-check-circle text-cyber-red"></i>
+                                <span>Interactive Power BI DAX Formulas & Time Intelligence</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-300">
+                                <i class="fas fa-check-circle text-cyber-red"></i>
+                                <span>Python Matplotlib & Seaborn Visual Export Pipelines</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-gray-300">
+                                <i class="fas fa-check-circle text-cyber-red"></i>
+                                <span>Deloitte & Simplilearn SkillUp Certified Methodology</span>
+                            </div>
+                        </div>
+
+                        <!-- Tech Stack Tags -->
+                        <div class="flex flex-wrap gap-2 mb-6 font-mono text-xs">
+                            <span class="px-2.5 py-1 rounded bg-cyber-card border border-cyber-border text-gray-300">Python</span>
+                            <span class="px-2.5 py-1 rounded bg-cyber-card border border-cyber-border text-gray-300">SQL / MySQL</span>
+                            <span class="px-2.5 py-1 rounded bg-cyber-card border border-cyber-border text-gray-300">Power BI</span>
+                            <span class="px-2.5 py-1 rounded bg-cyber-card border border-cyber-border text-gray-300">Excel DAX</span>
+                            <span class="px-2.5 py-1 rounded bg-cyber-card border border-cyber-border text-gray-300">Data Visualization</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-cyber-border/30 flex justify-between items-center font-mono text-xs">
+                        <span class="text-gray-400"><i class="fas fa-database text-cyber-red mr-1"></i> Data Analytics Pipeline</span>
+                        <a href="#analytics" class="text-cyber-lightred hover:text-white flex items-center gap-1 font-bold">
+                            Interactive Demo <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS & ACHIEVEMENTS SECTION -->
+    <section id="certifications" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <!-- Certifications Column -->
+                <div>
+                    <div class="mb-8">
+                        <h2 class="text-xs font-mono font-bold text-cyber-red tracking-widest uppercase mb-2"><i class="fas fa-certificate mr-2"></i> VERIFIED CREDENTIALS</h2>
+                        <h3 class="text-3xl font-extrabold text-white">Certifications (2026)</h3>
+                        <div class="w-12 h-1 bg-cyber-red mt-3 rounded-full"></div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Cert 1: Deloitte -->
+                        <div class="glass-panel rounded-xl p-4 border border-cyber-border/50 hover:border-cyber-red transition-all flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-cyber-darkred/80 border border-cyber-red flex items-center justify-center text-cyber-red text-xl shrink-0">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-bold text-white text-base">Data Analytics Job Simulation</h4>
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyber-card text-cyber-lightred border border-cyber-border">2026</span>
+                                </div>
+                                <p class="text-xs font-mono text-cyber-red mt-0.5">Deloitte // Forage</p>
+                                <p class="text-xs text-gray-400 mt-2">Completed practical business intelligence and client data analytics scenarios simulated by Deloitte.</p>
+                            </div>
+                        </div>
+
+                        <!-- Cert 2: Data Analytics Projects Simplilearn -->
+                        <div class="glass-panel rounded-xl p-4 border border-cyber-border/50 hover:border-cyber-red transition-all flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-cyber-darkred/80 border border-cyber-red flex items-center justify-center text-cyber-red text-xl shrink-0">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-bold text-white text-base">Data Analytics Projects</h4>
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyber-card text-cyber-lightred border border-cyber-border">2026</span>
+                                </div>
+                                <p class="text-xs font-mono text-cyber-red mt-0.5">Simplilearn SkillUp</p>
+                                <p class="text-xs text-gray-400 mt-2">End-to-end data processing, exploratory analysis, and dashboard generation.</p>
+                            </div>
+                        </div>
+
+                        <!-- Cert 3: Intro to Data Analytics -->
+                        <div class="glass-panel rounded-xl p-4 border border-cyber-border/50 hover:border-cyber-red transition-all flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-cyber-darkred/80 border border-cyber-red flex items-center justify-center text-cyber-red text-xl shrink-0">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-bold text-white text-base">Introduction to Data Analytics</h4>
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyber-card text-cyber-lightred border border-cyber-border">2026</span>
+                                </div>
+                                <p class="text-xs font-mono text-cyber-red mt-0.5">Simplilearn SkillUp</p>
+                                <p class="text-xs text-gray-400 mt-2">Fundamental data analytics principles, statistical methods, and visualization concepts.</p>
+                            </div>
+                        </div>
+
+                        <!-- Cert 4: MS Excel -->
+                        <div class="glass-panel rounded-xl p-4 border border-cyber-border/50 hover:border-cyber-red transition-all flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-cyber-darkred/80 border border-cyber-red flex items-center justify-center text-cyber-red text-xl shrink-0">
+                                <i class="fas fa-file-excel"></i>
+                            </div>
+                            <div class="flex-grow">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-bold text-white text-base">Introduction to MS Excel</h4>
+                                    <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-cyber-card text-cyber-lightred border border-cyber-border">2026</span>
+                                </div>
+                                <p class="text-xs font-mono text-cyber-red mt-0.5">Microsoft x Simplilearn SkillUp</p>
+                                <p class="text-xs text-gray-400 mt-2">Advanced formulas, formatting, pivot tables, and spreadsheet data manipulation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements & Honors Column -->
+                <div>
+                    <div class="mb-8">
+                        <h2 class="text-xs font-mono font-bold text-cyber-red tracking-widest uppercase mb-2"><i class="fas fa-trophy mr-2"></i> HONORS & AWARDS</h2>
+                        <h3 class="text-3xl font-extrabold text-white">Achievements & Distinction</h3>
+                        <div class="w-12 h-1 bg-cyber-red mt-3 rounded-full"></div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Award 1: SYMIT'26 Winner -->
+                        <div class="glass-panel rounded-xl p-5 border border-cyber-red/60 shadow-glow-sm flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-cyber-red text-white flex items-center justify-center text-2xl shrink-0 shadow-neon-red">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-mono font-bold text-cyber-red uppercase tracking-wider block">PRIZE WINNER // SYMIT'26</span>
+                                <h4 class="font-bold text-white text-lg mt-0.5">25th National Level Technical Symposium</h4>
+                                <p class="text-xs font-mono text-gray-300 mt-1"><i class="fas fa-university text-cyber-red mr-1"></i> Muthayammal Engineering College (2026)</p>
+                                <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+                                    Secured Prize Winner distinction in Data Analysis competition amongst participant teams across national engineering institutions.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Award 2: SYMIT Participation -->
+                        <div class="glass-panel rounded-xl p-5 border border-cyber-border/50 hover:border-cyber-red transition-all flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-cyber-darkred/80 border border-cyber-red flex items-center justify-center text-cyber-red text-xl shrink-0">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-mono font-bold text-cyber-lightred uppercase tracking-wider block">NATIONAL SYMPOSIUM</span>
+                                <h4 class="font-bold text-white text-lg mt-0.5">SYMIT'26 National Technical Symposium</h4>
+                                <p class="text-xs font-mono text-gray-300 mt-1">Certificate of Participation (2026)</p>
+                                <p class="text-xs text-gray-400 mt-2">Active participation in technical event challenges and data hackathons.</p>
+                            </div>
+                        </div>
+
+                        <!-- Award 3: Photography Award -->
+                        <div class="glass-panel rounded-xl p-5 border border-cyber-border/50 hover:border-cyber-red transition-all flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-cyber-darkred/80 border border-cyber-red flex items-center justify-center text-cyber-red text-xl shrink-0">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div>
+                                <span class="text-[10px] font-mono font-bold text-cyber-lightred uppercase tracking-wider block">FIRST PRIZE // PHOTOGRAPHY</span>
+                                <h4 class="font-bold text-white text-lg mt-0.5">Annual Cultural & Sports Competition</h4>
+                                <p class="text-xs font-mono text-gray-300 mt-1"><i class="fas fa-graduation-cap text-cyber-red mr-1"></i> VSA Group of Institutions (2026)</p>
+                                <p class="text-xs text-gray-400 mt-2 leading-relaxed">
+                                    Awarded First Prize for visual framing, creative perspective, and technical mastery in photography.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE CLI TERMINAL SECTION -->
+    <section id="terminal" class="py-20 bg-cyber-black/95 relative z-10 border-t border-cyber-border/30">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <h2 class="text-xs font-mono font-bold text-cyber-red tracking-widest uppercase mb-2"><i class="fas fa-terminal mr-2"></i> COMMAND LINE INTERFACE</h2>
+                <h3 class="text-3xl font-extrabold text-white">Interactive Developer Shell</h3>
+                <p class="text-xs font-mono text-gray-400 mt-2">Type <span class="text-cyber-red font-bold">help</span> to view available interactive commands.</p>
+            </div>
+
+            <!-- Terminal Window Window Frame -->
+            <div class="glass-panel rounded-2xl border border-cyber-border shadow-neon-card overflow-hidden font-mono text-xs sm:text-sm">
+                <!-- Terminal Title Bar -->
+                <div class="bg-cyber-card/90 px-4 py-3 border-b border-cyber-border/50 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                        <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                        <span class="text-gray-400 ml-2 text-xs">vk@portfolio-terminal: ~</span>
+                    </div>
+                    <span class="text-[10px] text-cyber-red font-bold">BASH 5.2.15</span>
+                </div>
+
+                <!-- Terminal Display Content -->
+                <div id="terminal-body" class="p-4 sm:p-6 h-80 overflow-y-auto space-y-3 bg-cyber-black/90 text-gray-300">
+                    <div>
+                        <p class="text-cyber-lightred font-bold">Welcome to Vijayakumar V's Interactive Portfolio Shell [v2.6.0]</p>
+                        <p class="text-gray-500 text-xs mt-1">Type 'help' to list commands or click quick chips below.</p>
+                    </div>
+                </div>
+
+                <!-- Terminal Quick Chip Buttons -->
+                <div class="px-4 py-2 bg-cyber-card/60 border-t border-cyber-border/30 flex flex-wrap gap-2 text-[11px]">
+                    <span class="text-gray-500 font-bold self-center mr-1">Quick:</span>
+                    <button onclick="executeCommand('bio')" class="px-2.5 py-1 rounded bg-cyber-darkred/60 text-cyber-lightred border border-cyber-red/30 hover:bg-cyber-red hover:text-white transition-all">bio</button>
+                    <button onclick="executeCommand('skills')" class="px-2.5 py-1 rounded bg-cyber-darkred/60 text-cyber-lightred border border-cyber-red/30 hover:bg-cyber-red hover:text-white transition-all">skills</button>
+                    <button onclick="executeCommand('projects')" class="px-2.5 py-1 rounded bg-cyber-darkred/60 text-cyber-lightred border border-cyber-red/30 hover:bg-cyber-red hover:text-white transition-all">projects</button>
+                    <button onclick="executeCommand('certifications')" class="px-2.5 py-1 rounded bg-cyber-darkred/60 text-cyber-lightred border border-cyber-red/30 hover:bg-cyber-red hover:text-white transition-all">certifications</button>
+                    <button onclick="executeCommand('contact')" class="px-2.5 py-1 rounded bg-cyber-darkred/60 text-cyber-lightred border border-cyber-red/30 hover:bg-cyber-red hover:text-white transition-all">contact</button>
+                    <button onclick="executeCommand('clear')" class="px-2.5 py-1 rounded bg-gray-800 text-gray-400 hover:text-white transition-all">clear</button>
+                </div>
+
+                <!-- Input Prompt Bar -->
+                <form onsubmit="handleTerminalSubmit(event)" class="px-4 py-3 bg-cyber-black border-t border-cyber-border/40 flex items-center gap-2">
+                    <span class="text-cyber-red font-bold">vk@portfolio:~$</span>
+                    <input type="text" id="terminal-input" autocomplete="off" placeholder="Type a command (e.g. bio, skills, contact)..." class="w-full bg-transparent text-white focus:outline-none font-mono text-xs sm:text-sm">
+                    <button type="submit" class="text-cyber-red px-2 py-1 hover:text-white"><i class="fas fa-arrow-right"></i></button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-20 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono font-bold text-cyber-red tracking-widest uppercase mb-2"><i class="fas fa-paper-plane mr-2"></i> GET IN TOUCH</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Let's Connect & Collaborate</h3>
+                <div class="w-16 h-1 bg-cyber-red mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Contact Direct Info -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="glass-panel rounded-2xl p-6 border border-cyber-border/60 shadow-neon-card space-y-6">
+                        <h4 class="text-xl font-bold text-white mb-2">Direct Contact Telemetry</h4>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Currently open to entry-level <strong class="text-white">Data Analyst, Business Intelligence, or IT Engineering</strong> opportunities. Feel free to reach out via email, phone, or LinkedIn.
+                        </p>
+
+                        <div class="space-y-4 font-mono text-xs">
+                            <a href="mailto:w162953@gmail.com" class="flex items-center gap-4 p-3 rounded-xl bg-cyber-card border border-cyber-border/40 hover:border-cyber-red transition-all text-gray-300 hover:text-white group">
+                                <div class="w-10 h-10 rounded-lg bg-cyber-darkred/80 border border-cyber-red flex items-center justify-center text-cyber-red group-hover:bg-cyber-red group-hover:text-white transition-all">
+                                    <i class="fas fa-envelope text-base"></i>
+                                </div>
+                                <div>
+                                    <span class="text-gray-500 block uppercase text-[10px]">Primary Email</span>
+                                    <span class="font-bold">w162953@gmail.com</span>
+                                </div>
+                            </a>
+
+                            <a href="tel:+917418042066" class="flex items-center gap-4 p-3 rounded-xl bg-cyber-card border border-cyber-border/40 hover:border-cyber-red transition-all text-gray-300 hover:text-white group">
+                                <div class="w-10 h-10 rounded-lg bg-cyber-darkred/80 border border-cyber-red flex items-center justify-center text-cyber-red group-hover:bg-cyber-red group-hover:text-white transition-all">
+                                    <i class="fas fa-phone-alt text-base"></i>
+                                </div>
+                                <div>
+                                    <span class="text-gray-500 block uppercase text-[10px]">Phone Number</span>
+                                    <span class="font-bold">+91 7418042066</span>
+                                </div>
+                            </a>
+
+                            <div class="flex items-center gap-4 p-3 rounded-xl bg-cyber-card border border-cyber-border/40 text-gray-300">
+                                <div class="w-10 h-10 rounded-lg bg-cyber-darkred/80 border border-cyber-red flex items-center justify-center text-cyber-red">
+                                    <i class="fas fa-map-marker-alt text-base"></i>
+                                </div>
+                                <div>
+                                    <span class="text-gray-500 block uppercase text-[10px]">Location</span>
+                                    <span class="font-bold">Salem, Tamil Nadu, India</span>
+                                </div>
+                            </div>
+
+                            <a href="https://www.linkedin.com/in/vijayakumar-velmurugan-09b10642b" target="_blank" class="flex items-center gap-4 p-3 rounded-xl bg-cyber-card border border-cyber-border/40 hover:border-cyber-red transition-all text-gray-300 hover:text-white group">
+                                <div class="w-10 h-10 rounded-lg bg-cyber-darkred/80 border border-cyber-red flex items-center justify-center text-cyber-red group-hover:bg-cyber-red group-hover:text-white transition-all">
+                                    <i class="fab fa-linkedin text-base"></i>
+                                </div>
+                                <div>
+                                    <span class="text-gray-500 block uppercase text-[10px]">LinkedIn Network</span>
+                                    <span class="font-bold">vijayakumar-velmurugan-09b10642b</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Message Form -->
+                <div class="lg:col-span-7">
+                    <div class="glass-panel rounded-2xl p-6 sm:p-8 border border-cyber-border shadow-neon-card">
+                        <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-mono text-gray-400 mb-1 uppercase">Your Name *</label>
+                                    <input type="text" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl bg-cyber-black/80 border border-cyber-border/60 text-white placeholder-gray-600 focus:outline-none focus:border-cyber-red font-mono text-xs sm:text-sm transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-mono text-gray-400 mb-1 uppercase">Your Email *</label>
+                                    <input type="email" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-xl bg-cyber-black/80 border border-cyber-border/60 text-white placeholder-gray-600 focus:outline-none focus:border-cyber-red font-mono text-xs sm:text-sm transition-all">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-mono text-gray-400 mb-1 uppercase">Subject</label>
+                                <input type="text" placeholder="Entry Level Data Analyst Role / Project Inquiry" class="w-full px-4 py-3 rounded-xl bg-cyber-black/80 border border-cyber-border/60 text-white placeholder-gray-600 focus:outline-none focus:border-cyber-red font-mono text-xs sm:text-sm transition-all">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-mono text-gray-400 mb-1 uppercase">Message *</label>
+                                <textarea rows="4" required placeholder="Hello Vijayakumar, I reviewed your Data Analytics portfolio..." class="w-full px-4 py-3 rounded-xl bg-cyber-black/80 border border-cyber-border/60 text-white placeholder-gray-600 focus:outline-none focus:border-cyber-red font-mono text-xs sm:text-sm transition-all resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" id="submit-btn" class="w-full py-3.5 rounded-xl bg-cyber-red text-white font-mono font-bold hover:bg-red-600 transition-all shadow-neon-red flex items-center justify-center gap-2">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>TRANSMIT MESSAGE</span>
+                            </button>
+
+                            <!-- Form Status Message Banner -->
+                            <div id="form-status" class="hidden p-3 rounded-xl glass-panel border border-cyber-red text-xs font-mono text-center text-cyber-lightred"></div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-8 bg-cyber-black border-t border-cyber-border/40 font-mono text-xs text-gray-500 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-cyber-red inline-block"></span>
+                <span>© 2026 VIJAYAKUMAR V. ALL RIGHTS RESERVED.</span>
+            </div>
+            <div class="flex items-center space-x-6">
+                <a href="#hero" class="hover:text-cyber-red transition-colors">TOP ▲</a>
+                <a href="https://www.linkedin.com/in/vijayakumar-velmurugan-09b10642b" target="_blank" class="hover:text-cyber-red transition-colors">LINKEDIN</a>
+                <a href="mailto:w162953@gmail.com" class="hover:text-cyber-red transition-colors">EMAIL</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // THREE.JS 3D BACKGROUND ENGINE
+        let scene, camera, renderer, particlesMesh, gridHelper, cubeNode;
+        let mouseX = 0, mouseY = 0;
+
+        function initThreeJS() {
+            const container = document.getElementById('canvas-container');
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x060608, 0.0015);
+
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+            camera.position.z = 400;
+            camera.position.y = 100;
+            camera.lookAt(0, 0, 0);
+
+            renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            // 1. Cyber Particles System
+            const particleCount = 1200;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+
+            const colorRed = new THREE.Color(0xff1e43);
+            const colorDark = new THREE.Color(0x3d0812);
+
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 1200;
+                positions[i + 1] = (Math.random() - 0.5) * 1200;
+                positions[i + 2] = (Math.random() - 0.5) * 1200;
+
+                const mixedColor = colorDark.clone().lerp(colorRed, Math.random());
+                colors[i] = mixedColor.r;
+                colors[i + 1] = mixedColor.g;
+                colors[i + 2] = mixedColor.b;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: 3.5,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8
+            });
+
+            particlesMesh = new THREE.Points(geometry, material);
+            scene.add(particlesMesh);
+
+            // 2. Cyber Grid Floor
+            gridHelper = new THREE.GridHelper(2000, 50, 0xff1e43, 0x1f0810);
+            gridHelper.position.y = -250;
+            scene.add(gridHelper);
+
+            // 3. Central Holographic Rotating Geometric Node
+            const cubeGeo = new THREE.IcosahedronGeometry(60, 1);
+            const cubeMat = new THREE.MeshBasicMaterial({
+                color: 0xff1e43,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.25
+            });
+            cubeNode = new THREE.Mesh(cubeGeo, cubeMat);
+            cubeNode.position.set(250, 50, -100);
+            scene.add(cubeNode);
+
+            window.addEventListener('resize', onWindowResize, false);
+            document.addEventListener('mousemove', onDocumentMouseMove, false);
+
+            animateThreeJS();
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function onDocumentMouseMove(event) {
+            mouseX = (event.clientX - window.innerWidth / 2) * 0.05;
+            mouseY = (event.clientY - window.innerHeight / 2) * 0.05;
+        }
+
+        function animateThreeJS() {
+            requestAnimationFrame(animateThreeJS);
+
+            particlesMesh.rotation.y += 0.0008;
+            particlesMesh.rotation.x += 0.0003;
+
+            if (cubeNode) {
+                cubeNode.rotation.x += 0.005;
+                cubeNode.rotation.y += 0.008;
+            }
+
+            camera.position.x += (mouseX - camera.position.x) * 0.03;
+            camera.position.y += (-mouseY + 100 - camera.position.y) * 0.03;
+            camera.lookAt(0, 0, 0);
+
+            renderer.render(scene, camera);
+        }
+
+        // TYPEWRITER ANIMATION
+        const typePhrases = [
+            "DATA ANALYST & BI DEVELOPER",
+            "POWER BI & PYTHON EXPERT",
+            "SQL & MYSQL DATABASE SPECIALIST",
+            "EMBEDDED IoT ROBOTICS ENGINEER"
+        ];
+        let typeIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentPhrase = typePhrases[typeIndex];
+            const targetEl = document.getElementById('typewriter');
+
+            if (!targetEl) return;
+
+            if (isDeleting) {
+                targetEl.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                targetEl.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                typeSpeed = 2200; // Pause at top
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                typeIndex = (typeIndex + 1) % typePhrases.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        // WEB AUDIO SYNTHESIZER
+        let audioCtx = null;
+        let soundEnabled = false;
+
+        function toggleAudio() {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('sound-icon');
+            const text = document.getElementById('sound-text');
+
+            if (soundEnabled) {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                icon.className = "fas fa-volume-up text-cyber-red";
+                text.textContent = "AUDIO ON";
+                playSynthBeep(600, 0.1);
+            } else {
+                icon.className = "fas fa-volume-mute text-gray-400";
+                text.textContent = "AUDIO OFF";
+            }
+        }
+
+        function playSynthBeep(freq = 440, duration = 0.08) {
+            if (!soundEnabled || !audioCtx) return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) { }
+        }
+
+        // CHART.JS DATA ENGINE
+        let mainChart, pieChart, radarChart;
+
+        function initCharts() {
+            Chart.defaults.color = '#94a3b8';
+            Chart.defaults.font.family = 'JetBrains Mono';
+
+            // 1. Main Analytics Trend Line Chart
+            const ctxMain = document.getElementById('mainAnalyticsChart').getContext('2d');
+            const gradRed = ctxMain.createLinearGradient(0, 0, 0, 300);
+            gradRed.addColorStop(0, 'rgba(255, 30, 67, 0.4)');
+            gradRed.addColorStop(1, 'rgba(255, 30, 67, 0.0)');
+
+            mainChart = new Chart(ctxMain, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+                    datasets: [{
+                        label: 'Data Volume Processed (GB)',
+                        data: [120, 190, 300, 250, 420, 510, 680, 850],
+                        borderColor: '#ff1e43',
+                        borderWidth: 3,
+                        backgroundColor: gradRed,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#ff1e43',
+                        pointBorderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: 'rgba(255, 30, 67, 0.08)' } },
+                        y: { grid: { color: 'rgba(255, 30, 67, 0.08)' } }
+                    }
+                }
+            });
+
+            // 2. Pie Chart Breakdown
+            const ctxPie = document.getElementById('pieAnalyticsChart').getContext('2d');
+            pieChart = new Chart(ctxPie, {
+                type: 'doughnut',
+                data: {
+                    labels: ['SQL Queries', 'Power BI DAX', 'Python Analytics', 'Excel Models'],
+                    datasets: [{
+                        data: [35, 30, 20, 15],
+                        backgroundColor: ['#ff1e43', '#d90429', '#ef233c', '#8d99ae'],
+                        borderColor: '#0f0f14',
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } } }
+                }
+            });
+
+            // 3. Radar Competency Chart
+            const ctxRadar = document.getElementById('skillsRadarChart').getContext('2d');
+            radarChart = new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['Python', 'SQL', 'Power BI', 'Excel', 'Embedded C', 'Git/GitHub'],
+                    datasets: [{
+                        label: 'Proficiency Rating',
+                        data: [85, 88, 90, 92, 82, 80],
+                        backgroundColor: 'rgba(255, 30, 67, 0.25)',
+                        borderColor: '#ff1e43',
+                        pointBackgroundColor: '#ff1e43'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(255, 30, 67, 0.2)' },
+                            grid: { color: 'rgba(255, 30, 67, 0.15)' },
+                            ticks: { display: false },
+                            suggestedMin: 50,
+                            suggestedMax: 100
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        // Interactive Filter Buttons for Dashboard
+        function updateDashboardData(mode) {
+            playSynthBeep(800, 0.05);
+
+            const btnSales = document.getElementById('btn-sales');
+            const btnIot = document.getElementById('btn-iot');
+            const btnSkills = document.getElementById('btn-skills');
+
+            [btnSales, btnIot, btnSkills].forEach(btn => {
+                btn.className = "px-4 py-2 rounded-lg glass-panel text-gray-300 border border-cyber-border hover:border-cyber-red transition-all";
+            });
+
+            if (mode === 'sales') {
+                btnSales.className = "px-4 py-2 rounded-lg bg-cyber-red text-white font-semibold shadow-glow-sm transition-all";
+                document.getElementById('main-chart-title').textContent = "Monthly Business Sales BI Trend";
+                document.getElementById('pie-chart-title').textContent = "Sales Category Distribution";
+                document.getElementById('metric-1').textContent = "$2,848.5K";
+                document.getElementById('metric-2').textContent = "1,450,200";
+
+                mainChart.data.datasets[0].data = [120, 190, 300, 250, 420, 510, 680, 850];
+                pieChart.data.datasets[0].data = [35, 30, 20, 15];
+            } else if (mode === 'iot') {
+                btnIot.className = "px-4 py-2 rounded-lg bg-cyber-red text-white font-semibold shadow-glow-sm transition-all";
+                document.getElementById('main-chart-title').textContent = "ESP32 Sensor Sampling Telemetry (Hz)";
+                document.getElementById('pie-chart-title').textContent = "Hardware Signal Types";
+                document.getElementById('metric-1').textContent = "99.8% Sync";
+                document.getElementById('metric-2').textContent = "450,000 Pkts";
+
+                mainChart.data.datasets[0].data = [40, 80, 150, 300, 280, 520, 610, 790];
+                pieChart.data.datasets[0].data = [45, 35, 10, 10];
+            } else if (mode === 'skills') {
+                btnSkills.className = "px-4 py-2 rounded-lg bg-cyber-red text-white font-semibold shadow-glow-sm transition-all";
+                document.getElementById('main-chart-title').textContent = "Code Quality & Query Execution Benchmark";
+                document.getElementById('pie-chart-title').textContent = "Languages Used";
+                document.getElementById('metric-1').textContent = "92% Score";
+                document.getElementById('metric-2').textContent = "100+ Scripts";
+
+                mainChart.data.datasets[0].data = [80, 85, 88, 90, 92, 94, 96, 98];
+                pieChart.data.datasets[0].data = [40, 25, 20, 15];
+            }
+
+            mainChart.update();
+            pieChart.update();
+        }
+
+        // ROBOT INTERACTIVE SIMULATION LOGIC
+        function updateRobotSimulation(distance) {
+            playSynthBeep(400 + distance * 5, 0.02);
+            document.getElementById('dist-val').textContent = distance + " cm";
+
+            const statusEl = document.getElementById('robot-status');
+            const actionEl = document.getElementById('motor-action');
+
+            if (distance < 10) {
+                statusEl.textContent = "TOO CLOSE // STOP";
+                statusEl.className = "text-red-500 font-bold";
+                actionEl.textContent = "EMERGENCY BRAKE (PWM: 0)";
+            } else if (distance >= 10 && distance <= 40) {
+                statusEl.textContent = "TARGET TRACKED";
+                statusEl.className = "text-green-400 font-bold";
+                actionEl.textContent = `FOLLOWING FORWARD (PWM: ${Math.round(distance * 5)})`;
+            } else {
+                statusEl.textContent = "SEARCHING TARGET";
+                statusEl.className = "text-yellow-400 font-bold";
+                actionEl.textContent = "SWEEP ROTATION (PWM: 120)";
+            }
+        }
+
+        // INTERACTIVE CLI TERMINAL ENGINE
+        function handleTerminalSubmit(e) {
+            e.preventDefault();
+            const inputEl = document.getElementById('terminal-input');
+            const cmd = inputEl.value.trim().toLowerCase();
+            if (cmd) {
+                executeCommand(cmd);
+                inputEl.value = '';
+            }
+        }
+
+        function executeCommand(cmd) {
+            playSynthBeep(700, 0.04);
+            const terminalBody = document.getElementById('terminal-body');
+
+            // Print Command
+            const cmdPrompt = document.createElement('div');
+            cmdPrompt.className = "text-cyber-red font-bold mt-2";
+            cmdPrompt.innerHTML = `vk@portfolio:~$ <span class="text-white">${cmd}</span>`;
+            terminalBody.appendChild(cmdPrompt);
+
+            // Output logic
+            const output = document.createElement('div');
+            output.className = "text-gray-300 ml-2 mt-1 leading-relaxed";
+
+            switch (cmd) {
+                case 'help':
+                    output.innerHTML = `
+                        Available commands:<br>
+                        - <span class="text-cyber-lightred font-bold">bio</span>: Brief summary of Vijayakumar V<br>
+                        - <span class="text-cyber-lightred font-bold">skills</span>: List technical competencies<br>
+                        - <span class="text-cyber-lightred font-bold">projects</span>: View featured engineering projects<br>
+                        - <span class="text-cyber-lightred font-bold">certifications</span>: View 2026 certifications<br>
+                        - <span class="text-cyber-lightred font-bold">contact</span>: Direct email, phone, and location<br>
+                        - <span class="text-cyber-lightred font-bold">clear</span>: Clear terminal history
+                    `;
+                    break;
+                case 'bio':
+                    output.innerHTML = `
+                        <strong class="text-white">VIJAYAKUMAR V</strong><br>
+                        B.Tech Information Technology Student (2024-2028) at VSA Group of Institutions.<br>
+                        Detail-oriented Data Analyst skilled in Python, SQL, Power BI, and MS Excel.
+                    `;
+                    break;
+                case 'skills':
+                    output.innerHTML = `
+                        <strong class="text-white">Core Skills:</strong> Python, SQL, MySQL, Power BI, MS Excel, Git, GitHub.<br>
+                        <strong class="text-white">Hardware:</strong> ESP32, Embedded C/C++, Ultrasonic & IR Sensors, Motor Drivers.
+                    `;
+                    break;
+                case 'projects':
+                    output.innerHTML = `
+                        1. <strong class="text-white">Human-Following-Robot:</strong> Autonomous ESP32 sensor tracking robot.<br>
+                        2. <strong class="text-white">Data Analytics BI Suite:</strong> SQL + Python + Power BI dashboards.
+                    `;
+                    break;
+                case 'certifications':
+                    output.innerHTML = `
+                        - Deloitte Forage: Data Analytics Job Simulation (2026)<br>
+                        - Simplilearn SkillUp: Data Analytics Projects & Introduction (2026)<br>
+                        - Microsoft x Simplilearn: MS Excel (2026)
+                    `;
+                    break;
+                case 'contact':
+                    output.innerHTML = `
+                        Email: w162953@gmail.com | Phone: +91 7418042066<br>
+                        Location: Salem, Tamil Nadu, India<br>
+                        LinkedIn: linkedin.com/in/vijayakumar-velmurugan-09b10642b
+                    `;
+                    break;
+                case 'clear':
+                    terminalBody.innerHTML = '';
+                    return;
+                default:
+                    output.innerHTML = `<span class="text-red-400">Command not recognized: '${cmd}'. Type 'help' for options.</span>`;
+            }
+
+            terminalBody.appendChild(output);
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+
+        // MOBILE MENU TOGGLE
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // FORM SUBMISSION HANDLER
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            playSynthBeep(900, 0.1);
+            const btn = document.getElementById('submit-btn');
+            const status = document.getElementById('form-status');
+
+            btn.disabled = true;
+            btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> TRANSMITTING...`;
+
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fas fa-check"></i> TRANSMITTED`;
+                status.classList.remove('hidden');
+                status.innerHTML = `Message successfully dispatched! Vijayakumar will get back to you shortly.`;
+                e.target.reset();
+            }, 1200);
+        }
+
+        // INITIALIZATION ON WINDOW LOAD
+        window.onload = function () {
+            initThreeJS();
+            initCharts();
+            typeEffect();
+
+            // GSAP Scroll Animations
+            gsap.registerPlugin(ScrollTrigger);
+
+            gsap.utils.toArray('.glass-panel-hover').forEach(card => {
+                gsap.from(card, {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.8
+                });
+            });
+        };
+    </script>
+</body>
+</html>
